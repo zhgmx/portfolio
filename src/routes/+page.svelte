@@ -54,7 +54,7 @@
 				'Led the company\u2019s website development and deployment end to end, from interface to infrastructure, using Vite, React 18, TypeScript, and Tailwind CSS for a research and consulting firm.'
 		},
 		{
-			role: 'Software Development Intern',
+			role: 'Software Engineer Intern',
 			company: 'Virtuos',
 			companyHref: 'https://www.virtuosgames.com/',
 			location: 'Shanghai, China',
@@ -94,14 +94,15 @@
 			<p>
 				I'm currently studying at
 				<InlineLink href="https://www.stonybrook.edu/" label="Stony Brook University" />, pursuing a
-				B.S. in Computer Science. Previously, I was a Software Developer Intern at
+				B.S. in Computer Science. Previously, I interned at
 				<InlineLink href="https://www.virtuosgames.com/" label="Virtuos" />, where I assisted with
-				development of internal systems in the ERP department.
+				development of internal systems in the ERP department. I'm always open to new opportunities,
+				so feel free to reach out!
 			</p>
 			<p>
-				A lot of my work lives in the Minecraft ecosystem: proxies, mods, and the stats sites and
-				APIs around them. More recently I've been moving toward AI tooling and LLM experimentation.
-				You can find most of my work on
+				A lot of my past work lives in the Minecraft ecosystem: proxies, mods, and the stats sites
+				and APIs around them. More recently I've been moving toward AI tooling and LLM
+				experimentation. You can find most of my work on
 				<InlineLink href="https://github.com/zhgmx" label="GitHub" />.
 			</p>
 		</section>
