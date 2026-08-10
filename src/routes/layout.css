@@ -257,3 +257,30 @@ a {
 		transition: none;
 	}
 }
+
+::view-transition-old(root) {
+	animation: view-out 200ms var(--ease-out);
+}
+
+::view-transition-new(root) {
+	animation: view-in 250ms var(--ease-out);
+}
+
+@keyframes view-out {
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes view-in {
+	from {
+		opacity: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation-duration: 0.01ms;
+	}
+}

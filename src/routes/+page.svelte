@@ -492,6 +492,8 @@
 		.item-title,
 		.project,
 		.project-title,
+		:global(.link.icon-link),
+		:global(.copy-email.top-email),
 		:global(.stack-item) {
 			transition: none;
 		}
