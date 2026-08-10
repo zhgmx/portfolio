@@ -459,7 +459,6 @@
 		gap: 0 1.25rem;
 		align-items: center;
 		padding: 0.75rem 0;
-		border-radius: 0.5rem;
 		transition: transform 120ms var(--ease-out);
 	}
 
