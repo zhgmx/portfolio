@@ -9,6 +9,7 @@ export const techLinks: Record<string, { icon: string; href: string }> = {
 	Rust: { icon: 'rust', href: 'https://www.rust-lang.org/' },
 	React: { icon: 'react', href: 'https://react.dev/' },
 	'Next.js': { icon: 'nextdotjs', href: 'https://nextjs.org/' },
+	SvelteKit: { icon: 'svelte', href: 'https://svelte.dev/docs/kit/introduction' },
 	Vite: { icon: 'vite', href: 'https://vite.dev/' },
 	'Tailwind CSS': { icon: 'tailwindcss', href: 'https://tailwindcss.com/' },
 	Express: { icon: 'express', href: 'https://expressjs.com/' },

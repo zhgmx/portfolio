@@ -32,7 +32,7 @@
 		},
 		{
 			label: 'Web',
-			items: ['React', 'Next.js', 'Vite', 'Tailwind CSS', 'Express', 'Node.js']
+			items: ['React', 'Next.js', 'SvelteKit', 'Vite', 'Tailwind CSS', 'Express', 'Node.js']
 		},
 		{
 			label: 'Tools',
