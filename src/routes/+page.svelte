@@ -68,7 +68,10 @@
 
 <svelte:head>
 	<title>Max Zhang</title>
-	<meta name="description" content="Computer Science student at Stony Brook University." />
+	<meta
+		name="description"
+		content="A personal portfolio of projects, writing, and experiments by a computer science student."
+	/>
 </svelte:head>
 
 <div class="shell">
