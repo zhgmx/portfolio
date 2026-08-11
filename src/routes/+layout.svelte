@@ -2,6 +2,7 @@
 	import { onNavigate } from '$app/navigation';
 	import { bind, setVolume } from 'cuelume';
 	import { onMount } from 'svelte';
+	import Footer from '$lib/Footer.svelte';
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
 
@@ -38,3 +39,4 @@
 </svelte:head>
 
 {@render children()}
+<Footer />
