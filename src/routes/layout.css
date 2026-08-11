@@ -262,6 +262,12 @@ a {
 	}
 }
 
+@media (hover: none), (pointer: coarse) {
+	.link .tip {
+		display: none;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.tip {
 		transition: none;
