@@ -221,6 +221,7 @@ a {
 
 .tip-path {
 	color: var(--muted);
+	font-weight: 400;
 	padding-left: calc(1.125em + 0.5rem);
 }
 
