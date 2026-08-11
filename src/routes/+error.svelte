@@ -1,6 +1,33 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { play } from 'cuelume';
 	import IconArrowLeftRegular from 'phosphor-icons-svelte/IconArrowLeftRegular.svelte';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		if (page.status !== 404) return;
+
+		const playError = () => play('error', { volume: 0.24 });
+
+		if (navigator.userActivation?.hasBeenActive) {
+			playError();
+			return;
+		}
+
+		const handleInteraction = () => {
+			playError();
+			window.removeEventListener('pointerdown', handleInteraction);
+			window.removeEventListener('keydown', handleInteraction);
+		};
+
+		window.addEventListener('pointerdown', handleInteraction, { once: true });
+		window.addEventListener('keydown', handleInteraction, { once: true });
+
+		return () => {
+			window.removeEventListener('pointerdown', handleInteraction);
+			window.removeEventListener('keydown', handleInteraction);
+		};
+	});
 </script>
 
 <svelte:head>
@@ -16,7 +43,9 @@
 		<h1>Something went wrong.</h1>
 		<p class="message">Try again, or head back to the homepage.</p>
 	{/if}
-	<a class="home-link" href="/"><IconArrowLeftRegular /> Home</a>
+	<a class="home-link" href="/" data-cuelume-press="press" data-cuelume-release="release">
+		<IconArrowLeftRegular /> Home
+	</a>
 </main>
 
 <style>

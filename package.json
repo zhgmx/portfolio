@@ -35,6 +35,7 @@
 		"wrangler": "^4.118.0"
 	},
 	"dependencies": {
+		"cuelume": "^0.2.1",
 		"marked": "^18.0.7",
 		"phosphor-icons-svelte": "^2.1.0"
 	}

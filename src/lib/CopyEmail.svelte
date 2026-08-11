@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { play } from 'cuelume';
 	import IconCheckRegular from 'phosphor-icons-svelte/IconCheckRegular.svelte';
 	import IconCopyRegular from 'phosphor-icons-svelte/IconCopyRegular.svelte';
 	import IconEnvelopeSimpleRegular from 'phosphor-icons-svelte/IconEnvelopeSimpleRegular.svelte';
@@ -31,6 +32,7 @@
 			textarea.remove();
 		}
 		if (ok) {
+			play('success', { volume: 0.35 });
 			copied = true;
 			clearTimeout(timer);
 			timer = setTimeout(() => (copied = false), 1600);
@@ -44,6 +46,7 @@
 	type="button"
 	onclick={copy}
 	aria-label={label ? `Copy ${label}` : 'Copy email address'}
+	data-cuelume-press="press"
 >
 	{#if label}{label}{:else}<IconEnvelopeSimpleRegular class="mail-icon" />{/if}
 

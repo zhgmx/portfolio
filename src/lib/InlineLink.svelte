@@ -34,6 +34,8 @@
 	target={external ? '_blank' : undefined}
 	rel={external ? 'noreferrer' : undefined}
 	aria-label={label ? undefined : ariaLabel}
+	data-cuelume-press="press"
+	data-cuelume-release="release"
 >
 	{#if children}
 		{@render children()}

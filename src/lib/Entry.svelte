@@ -33,7 +33,15 @@
 
 <main class="shell">
 	<header class="head">
-		<button class="back" type="button" onclick={onBack}><IconArrowLeftRegular /> Back</button>
+		<button
+			class="back"
+			type="button"
+			onclick={onBack}
+			data-cuelume-press="press"
+			data-cuelume-release="release"
+		>
+			<IconArrowLeftRegular /> Back
+		</button>
 		<h1>{entry.title}</h1>
 		<div class="meta-row">
 			{#if entry.tech?.length}

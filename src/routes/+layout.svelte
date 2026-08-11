@@ -1,9 +1,16 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
+	import { bind, setVolume } from 'cuelume';
+	import { onMount } from 'svelte';
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
 
 	let { children } = $props();
+
+	onMount(() => {
+		setVolume(0.55);
+		bind();
+	});
 
 	onNavigate((navigation) => {
 		if (

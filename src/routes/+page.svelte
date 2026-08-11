@@ -5,6 +5,7 @@
 	import CopyEmail from '$lib/CopyEmail.svelte';
 	import InlineLink from '$lib/InlineLink.svelte';
 	import ProjectThumb from '$lib/ProjectThumb.svelte';
+	import SoundToggle from '$lib/SoundToggle.svelte';
 	import ThemeToggle from '$lib/ThemeToggle.svelte';
 	import { techLinks } from '$lib/tech';
 	import type { PageProps } from './$types';
@@ -84,6 +85,7 @@
 					{/each}
 					<CopyEmail class="top-email" />
 					<ThemeToggle />
+					<SoundToggle />
 				</div>
 			</div>
 			<p class="role">@zhgmx</p>
@@ -154,7 +156,12 @@
 			<h2>Projects</h2>
 			<div class="items">
 				{#each data.projects as project}
-					<a class="project" href={`/projects/${project.slug}`}>
+					<a
+						class="project"
+						href={`/projects/${project.slug}`}
+						data-cuelume-press="press"
+						data-cuelume-release="release"
+					>
 						<ProjectThumb src={project.image} />
 						<span class="project-main">
 							<span class="project-title">{project.title}</span>
@@ -169,7 +176,12 @@
 			<h2>Writing</h2>
 			<div class="items">
 				{#each data.writing as post}
-					<a class="item" href={`/writing/${post.slug}`}>
+					<a
+						class="item"
+						href={`/writing/${post.slug}`}
+						data-cuelume-press="press"
+						data-cuelume-release="release"
+					>
 						<span class="item-title">{post.title}</span>
 						<span class="item-description">{post.description}</span>
 					</a>

@@ -23,6 +23,7 @@
 	type="button"
 	onclick={toggle}
 	aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+	data-cuelume-toggle
 >
 	<span class="icon icon-sun" aria-hidden="true"><IconSunRegular /></span>
 	<span class="icon icon-moon" aria-hidden="true"><IconMoonRegular /></span>
