@@ -211,10 +211,6 @@ a {
 	margin: 0;
 }
 
-.tip-text {
-	min-width: 0;
-}
-
 .tip-host {
 	font-weight: 600;
 	color: var(--ink);

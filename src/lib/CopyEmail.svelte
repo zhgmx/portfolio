@@ -161,10 +161,6 @@
 			opacity: 1;
 			transform: translateY(0);
 		}
-
-		.copy-email:hover :global(.tip:hover) {
-			background: var(--soft);
-		}
 	}
 
 	.touch-tip {

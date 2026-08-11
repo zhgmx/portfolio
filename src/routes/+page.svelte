@@ -463,14 +463,6 @@
 		color: var(--muted);
 	}
 
-	.item {
-		gap: 0.25rem;
-	}
-
-	.project-main {
-		gap: 0.25rem;
-	}
-
 	.item:active {
 		transform: scale(0.98);
 	}
