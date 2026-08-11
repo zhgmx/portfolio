@@ -102,10 +102,6 @@ a {
 	transition: color 150ms var(--ease-out);
 }
 
-.prose :where(a):hover {
-	color: var(--muted);
-}
-
 .prose :where(img) {
 	max-width: 100%;
 	height: auto;
@@ -150,15 +146,6 @@ a {
 		color 150ms var(--ease-out);
 }
 
-.stack-item:hover {
-	border-color: var(--muted);
-	color: var(--muted);
-}
-
-.stack-item:hover .link-icon {
-	filter: invert(0.565);
-}
-
 .stack-item:active {
 	transform: scale(0.97);
 }
@@ -166,11 +153,6 @@ a {
 .stack-item .link-icon {
 	width: 0.875rem;
 	height: 0.875rem;
-}
-
-.link:hover {
-	color: var(--muted);
-	text-decoration-color: currentColor;
 }
 
 .link:focus-visible .tip {
@@ -254,6 +236,24 @@ a {
 }
 
 @media (hover: hover) and (pointer: fine) {
+	.prose :where(a):hover {
+		color: var(--muted);
+	}
+
+	.stack-item:hover {
+		border-color: var(--muted);
+		color: var(--muted);
+	}
+
+	.stack-item:hover .link-icon {
+		filter: invert(0.565);
+	}
+
+	.link:hover {
+		color: var(--muted);
+		text-decoration-color: currentColor;
+	}
+
 	.link:hover .tip,
 	.copy-email:hover .tip {
 		opacity: 1;

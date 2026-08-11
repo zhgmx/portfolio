@@ -92,17 +92,8 @@
 			width 150ms var(--ease-out);
 	}
 
-	.copy-email.copied-visible:hover :global(.tip) {
-		opacity: 1;
-		transform: translateY(0);
-	}
-
 	.copy-email.copied-visible :global(.tip) {
 		width: 6.75rem;
-	}
-
-	.copy-email:hover :global(.tip:hover) {
-		background: var(--soft);
 	}
 
 	.copy-email :global(.tip .label) {
@@ -148,6 +139,17 @@
 		clip: rect(0, 0, 0, 0);
 		white-space: nowrap;
 		border: 0;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.copy-email.copied-visible:hover :global(.tip) {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.copy-email:hover :global(.tip:hover) {
+			background: var(--soft);
+		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {

@@ -45,11 +45,6 @@
 			background-color 150ms var(--ease-out);
 	}
 
-	.toggle:hover {
-		color: var(--muted);
-		background: var(--soft);
-	}
-
 	.toggle:active {
 		transform: scale(0.96);
 	}
@@ -59,9 +54,7 @@
 		inset: 0;
 		display: grid;
 		place-items: center;
-		transition:
-			opacity 150ms var(--ease-out),
-			transform 150ms var(--ease-out);
+		transition: opacity 150ms var(--ease-out);
 	}
 
 	.icon :global(svg) {
@@ -71,28 +64,31 @@
 
 	.icon-sun {
 		opacity: 0;
-		transform: scale(0.8);
 	}
 
 	.icon-moon {
 		opacity: 1;
-		transform: scale(1);
 	}
 
 	:global(html[data-theme='dark']) .icon-sun {
 		opacity: 1;
-		transform: scale(1);
 	}
 
 	:global(html[data-theme='dark']) .icon-moon {
 		opacity: 0;
-		transform: scale(0.8);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.toggle,
 		.icon {
 			transition: none;
+		}
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.toggle:hover {
+			color: var(--muted);
+			background: var(--soft);
 		}
 	}
 </style>

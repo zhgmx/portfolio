@@ -245,11 +245,6 @@
 			transform 120ms var(--ease-out);
 	}
 
-	:global(.link.icon-link:hover) {
-		color: var(--ink);
-		background: var(--soft);
-	}
-
 	:global(.link.icon-link:active) {
 		transform: scale(0.96);
 	}
@@ -269,11 +264,6 @@
 			color 150ms var(--ease-out),
 			background-color 150ms var(--ease-out),
 			transform 120ms var(--ease-out);
-	}
-
-	:global(.copy-email.top-email:hover) {
-		color: var(--ink);
-		background: var(--soft);
 	}
 
 	:global(.copy-email.top-email:active) {
@@ -310,11 +300,6 @@
 			text-decoration-color 150ms var(--ease-out);
 	}
 
-	:global(.copy-email.email-copy:hover) {
-		color: var(--muted);
-		text-decoration-color: currentColor;
-	}
-
 	.section {
 		padding: 2.25rem 0;
 	}
@@ -338,10 +323,6 @@
 
 	.about :global(.link) {
 		color: var(--ink);
-	}
-
-	.about :global(.link:hover) {
-		color: var(--muted);
 	}
 
 	.subtext {
@@ -443,10 +424,6 @@
 		gap: 0.25rem;
 	}
 
-	.item:hover .item-title {
-		color: var(--muted);
-	}
-
 	.item:active {
 		transform: scale(0.98);
 	}
@@ -471,15 +448,31 @@
 		gap: 0.25rem;
 	}
 
-	.project:hover .project-title {
-		color: var(--muted);
-	}
-
 	.project:active {
 		transform: scale(0.98);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
+		:global(.link.icon-link:hover),
+		:global(.copy-email.top-email:hover) {
+			color: var(--ink);
+			background: var(--soft);
+		}
+
+		:global(.copy-email.email-copy:hover) {
+			color: var(--muted);
+			text-decoration-color: currentColor;
+		}
+
+		.about :global(.link:hover) {
+			color: var(--muted);
+		}
+
+		.item:hover .item-title,
+		.project:hover .project-title {
+			color: var(--muted);
+		}
+
 		:global(.project:hover .project-thumb img) {
 			transform: scale(1.03);
 		}

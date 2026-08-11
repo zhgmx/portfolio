@@ -94,10 +94,6 @@
 		transition: color 150ms var(--ease-out);
 	}
 
-	.back:hover {
-		color: var(--ink);
-	}
-
 	.back :global(svg) {
 		width: 0.9em;
 		height: 0.9em;
@@ -144,11 +140,6 @@
 			background-color 150ms var(--ease-out);
 	}
 
-	:global(.link.meta-link:hover) {
-		color: var(--muted);
-		background: var(--soft);
-	}
-
 	:global(.link.meta-link:active) {
 		transform: scale(0.96);
 	}
@@ -166,6 +157,17 @@
 	@media (prefers-reduced-motion: reduce) {
 		:global(.link.meta-link) {
 			transition: none;
+		}
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.back:hover {
+			color: var(--ink);
+		}
+
+		:global(.link.meta-link:hover) {
+			color: var(--muted);
+			background: var(--soft);
 		}
 	}
 </style>

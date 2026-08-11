@@ -47,10 +47,6 @@
 		transition: color 150ms var(--ease-out);
 	}
 
-	.home-link:hover {
-		color: var(--ink);
-	}
-
 	.home-link :global(svg) {
 		width: 0.9em;
 		height: 0.9em;
@@ -59,6 +55,12 @@
 	@media (prefers-reduced-motion: reduce) {
 		.home-link {
 			transition: none;
+		}
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.home-link:hover {
+			color: var(--ink);
 		}
 	}
 </style>
