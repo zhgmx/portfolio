@@ -1,5 +1,6 @@
 import { Marked } from 'marked';
 import { previewParts } from './links';
+import { techLinks } from './tech';
 
 export interface Entry {
 	slug: string;
@@ -36,37 +37,86 @@ const markdown = new Marked({
 	}
 });
 
-function parse(raw: string): Omit<Entry, 'slug'> {
+const metadataKeys = new Set([
+	'title',
+	'date',
+	'year',
+	'url',
+	'source',
+	'image',
+	'order',
+	'tech',
+	'summary'
+]);
+
+function invalidContent(source: string, message: string): never {
+	throw new Error(`Invalid content in ${source}: ${message}`);
+}
+
+function validDate(value: string): boolean {
+	if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+	const date = new Date(`${value}T00:00:00Z`);
+	return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
+
+function parse(raw: string, source: string): Omit<Entry, 'slug'> {
 	const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(raw);
+	if (!match) invalidContent(source, 'missing or malformed front matter');
+
 	const meta: Record<string, string> = {};
-	for (const line of (match?.[1] ?? '').split('\n')) {
+	for (const line of match[1].split('\n')) {
+		if (!line.trim()) continue;
 		const sep = line.indexOf(':');
-		if (sep < 1) continue;
-		meta[line.slice(0, sep).trim()] = line
+		if (sep < 1) invalidContent(source, `malformed metadata line: ${line}`);
+
+		const key = line.slice(0, sep).trim();
+		if (!metadataKeys.has(key)) invalidContent(source, `unknown metadata field "${key}"`);
+		if (key in meta) invalidContent(source, `duplicate metadata field "${key}"`);
+
+		meta[key] = line
 			.slice(sep + 1)
 			.trim()
 			.replace(/^["']|["']$/g, '');
 	}
-	const body = (match?.[2] ?? '').trim();
+
+	if (!meta.title) invalidContent(source, 'title is required');
+	if (meta.date && !validDate(meta.date)) {
+		invalidContent(source, `date must be a valid YYYY-MM-DD value, received "${meta.date}"`);
+	}
+	if (meta.year && !/^\d{4}$/.test(meta.year)) {
+		invalidContent(source, `year must contain four digits, received "${meta.year}"`);
+	}
+
+	const order = meta.order === undefined ? undefined : Number(meta.order);
+	if (order !== undefined && !Number.isFinite(order)) {
+		invalidContent(source, `order must be numeric, received "${meta.order}"`);
+	}
+
+	const tech = meta.tech
+		? meta.tech
+				.split(',')
+				.map((value) => value.trim())
+				.filter(Boolean)
+		: undefined;
+	for (const name of tech ?? []) {
+		if (!techLinks[name]) invalidContent(source, `unknown tech value "${name}"`);
+	}
+
+	const body = match[2].trim();
 	const paragraphs = body
 		.split(/\n\s*\n/)
 		.map((p) => p.replace(/\s*\n\s*/g, ' '))
 		.filter(Boolean);
 	const firstImage = /!\[[^\]]*\]\(([^)]+)\)/.exec(body);
 	return {
-		title: meta.title ?? 'Untitled',
+		title: meta.title,
 		date: meta.date,
 		year: meta.year,
 		url: meta.url,
 		source: meta.source,
 		image: meta.image ?? (firstImage ? firstImage[1].trim().replace(/\s+["'].*$/, '') : undefined),
-		order: meta.order ? Number(meta.order) : undefined,
-		tech: meta.tech
-			? meta.tech
-					.split(',')
-					.map((t) => t.trim())
-					.filter(Boolean)
-			: undefined,
+		order,
+		tech,
 		description: meta.summary ?? paragraphs[0] ?? '',
 		body
 	};
@@ -74,8 +124,11 @@ function parse(raw: string): Omit<Entry, 'slug'> {
 
 function load(files: Record<string, string>): Entry[] {
 	return Object.keys(files).map((key) => {
-		const slug = key.split('/').pop()?.replace(/\.md$/, '') ?? 'untitled';
-		return { ...parse(files[key]), slug };
+		const slug = key.split('/').pop()?.replace(/\.md$/, '');
+		if (!slug || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+			invalidContent(key, 'filename must use a lowercase kebab-case slug');
+		}
+		return { ...parse(files[key], key), slug };
 	});
 }
 
