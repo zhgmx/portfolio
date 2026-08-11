@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { onNavigate } from '$app/navigation';
 	import { bind, setVolume } from 'cuelume';
 	import { onMount } from 'svelte';
@@ -7,6 +8,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 
 	let { children } = $props();
+	const canonical = $derived(`https://zhgmx.com${page.url.pathname}`);
 
 	onMount(() => {
 		setVolume(0.55);
@@ -29,6 +31,7 @@
 </script>
 
 <svelte:head>
+	<link rel="canonical" href={canonical} />
 	<link rel="icon" href={favicon} />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
