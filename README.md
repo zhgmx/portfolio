@@ -6,3 +6,12 @@ Projects and writing are markdown files in `src/content/`. A new file in `src/co
 bun install
 bun run dev
 ```
+
+The site is deployed as a SvelteKit application on [Cloudflare Workers](https://developers.cloudflare.com/workers/).
+
+```sh
+bunx wrangler login
+bun run deploy
+```
+
+[Cuelume](https://cuelume.dev/) is used for clean interaction sounds. [Phosphor](https://phosphoricons.com/) is used for icons.
