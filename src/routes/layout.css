@@ -175,7 +175,7 @@ a {
 
 .link:focus-visible .tip {
 	opacity: 1;
-	transform: translateY(0) scale(1);
+	transform: translateY(0);
 }
 
 .tip {
@@ -195,8 +195,7 @@ a {
 	box-shadow: 0 12px 32px var(--shadow);
 	opacity: 0;
 	pointer-events: none;
-	transform-origin: left bottom;
-	transform: translateY(4px) scale(0.97);
+	transform: translateY(4px);
 	transition:
 		opacity 150ms var(--ease-out),
 		transform 150ms var(--ease-out);
@@ -258,7 +257,7 @@ a {
 	.link:hover .tip,
 	.copy-email:hover .tip {
 		opacity: 1;
-		transform: translateY(0) scale(1);
+		transform: translateY(0);
 	}
 }
 

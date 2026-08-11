@@ -78,7 +78,7 @@
 
 	.copy-email:focus-visible :global(.tip) {
 		opacity: 1;
-		transform: translateY(0) scale(1);
+		transform: translateY(0);
 	}
 
 	.copy-email :global(.tip) {
@@ -94,7 +94,7 @@
 
 	.copy-email.copied-visible:hover :global(.tip) {
 		opacity: 1;
-		transform: translateY(0) scale(1);
+		transform: translateY(0);
 	}
 
 	.copy-email.copied-visible :global(.tip) {

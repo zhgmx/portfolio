@@ -288,7 +288,6 @@
 	:global(.top-links .tip) {
 		top: calc(100% + 0.625rem);
 		bottom: auto;
-		transform-origin: left top;
 	}
 
 	:global(.top-links .tip::after) {
