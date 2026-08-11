@@ -31,9 +31,9 @@
 	}
 </script>
 
-<div class="shell">
+<main class="shell">
 	<header class="head">
-		<button class="back" type="button" onpointerdown={onBack}><IconArrowLeftRegular /> Back</button>
+		<button class="back" type="button" onclick={onBack}><IconArrowLeftRegular /> Back</button>
 		<h1>{entry.title}</h1>
 		<div class="meta-row">
 			{#if entry.tech?.length}
@@ -67,7 +67,7 @@
 	</header>
 
 	<div class="prose">{@html entry.html ?? ''}</div>
-</div>
+</main>
 
 <style>
 	.shell {

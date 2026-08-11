@@ -2,8 +2,15 @@
 	import IconMoonRegular from 'phosphor-icons-svelte/IconMoonRegular.svelte';
 	import IconSunRegular from 'phosphor-icons-svelte/IconSunRegular.svelte';
 
+	let theme = $state<'light' | 'dark'>(
+		typeof document !== 'undefined' && document.documentElement.dataset.theme === 'dark'
+			? 'dark'
+			: 'light'
+	);
+
 	function toggle() {
-		const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+		const next = theme === 'dark' ? 'light' : 'dark';
+		theme = next;
 		document.documentElement.dataset.theme = next;
 		try {
 			localStorage.setItem('theme', next);
@@ -11,7 +18,12 @@
 	}
 </script>
 
-<button class="toggle" type="button" onclick={toggle} aria-label="Toggle color theme">
+<button
+	class="toggle"
+	type="button"
+	onclick={toggle}
+	aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+>
 	<span class="icon icon-sun" aria-hidden="true"><IconSunRegular /></span>
 	<span class="icon icon-moon" aria-hidden="true"><IconMoonRegular /></span>
 </button>

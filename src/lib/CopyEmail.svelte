@@ -36,35 +36,18 @@
 			timer = setTimeout(() => (copied = false), 1600);
 		}
 	}
-
-	function copyKey(event: KeyboardEvent) {
-		if (event.key === 'Enter' || event.key === ' ') {
-			event.preventDefault();
-			event.stopPropagation();
-			copy();
-		}
-	}
 </script>
 
-<span
+<button
 	class="copy-email {className}"
 	class:copied-visible={copied}
-	role="button"
-	tabindex="0"
+	type="button"
 	onclick={copy}
-	onkeydown={copyKey}
-	aria-label="Copy email address"
+	aria-label={label ? `Copy ${label}` : 'Copy email address'}
 >
 	{#if label}{label}{:else}<IconEnvelopeSimpleRegular class="mail-icon" />{/if}
 
-	<span
-		class="tip"
-		role="button"
-		tabindex="-1"
-		onclick={(event) => copy(event)}
-		onkeydown={copyKey}
-		aria-label="Copy email address"
-	>
+	<span class="tip" aria-hidden="true">
 		<span class="label" class:hidden={copied}>
 			<IconCopyRegular />
 			Click to copy
@@ -74,7 +57,10 @@
 			Copied
 		</span>
 	</span>
-</span>
+	<span class="sr-only" aria-live="polite" aria-atomic="true">
+		{copied ? 'Email address copied' : ''}
+	</span>
+</button>
 
 <style>
 	.copy-email {
@@ -90,6 +76,11 @@
 		cursor: pointer;
 	}
 
+	.copy-email:focus-visible :global(.tip) {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+
 	.copy-email :global(.tip) {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr);
@@ -99,10 +90,6 @@
 			opacity 150ms var(--ease-out),
 			transform 150ms var(--ease-out),
 			width 150ms var(--ease-out);
-	}
-
-	.copy-email:hover :global(.tip) {
-		pointer-events: auto;
 	}
 
 	.copy-email.copied-visible:hover :global(.tip) {
@@ -149,6 +136,18 @@
 	.label :global(svg) {
 		width: 1em;
 		height: 1em;
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
 	}
 
 	@media (prefers-reduced-motion: reduce) {

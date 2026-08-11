@@ -58,6 +58,11 @@ a {
 	text-decoration: none;
 }
 
+:where(a, button):focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 3px;
+}
+
 ::selection {
 	color: var(--paper);
 	background: var(--ink);
@@ -166,6 +171,11 @@ a {
 .link:hover {
 	color: var(--muted);
 	text-decoration-color: currentColor;
+}
+
+.link:focus-visible .tip {
+	opacity: 1;
+	transform: translateY(0) scale(1);
 }
 
 .tip {
