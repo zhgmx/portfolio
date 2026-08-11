@@ -1,7 +1,6 @@
 <script lang="ts">
 	import IconGithubLogoRegular from 'phosphor-icons-svelte/IconGithubLogoRegular.svelte';
 	import IconLinkedinLogoRegular from 'phosphor-icons-svelte/IconLinkedinLogoRegular.svelte';
-	import { onNavigate } from '$app/navigation';
 	import CopyEmail from '$lib/CopyEmail.svelte';
 	import InlineLink from '$lib/InlineLink.svelte';
 	import ProjectThumb from '$lib/ProjectThumb.svelte';
@@ -30,10 +29,6 @@
 			}
 		]
 	};
-
-	onNavigate(() => {
-		sessionStorage.setItem('portfolio-visited', '1');
-	});
 
 	const socials = [
 		{ label: 'GitHub', href: 'https://github.com/zhgmx', icon: IconGithubLogoRegular },

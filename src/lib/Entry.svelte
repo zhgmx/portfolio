@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 	import IconArrowLeftRegular from 'phosphor-icons-svelte/IconArrowLeftRegular.svelte';
 	import IconGithubLogoRegular from 'phosphor-icons-svelte/IconGithubLogoRegular.svelte';
 	import IconGlobeSimpleRegular from 'phosphor-icons-svelte/IconGlobeSimpleRegular.svelte';
@@ -23,11 +25,12 @@
 	);
 
 	function onBack() {
-		if (sessionStorage.getItem('portfolio-visited')) {
+		if (page.state.returnToHome) {
 			history.back();
-		} else {
-			location.href = '/';
+			return;
 		}
+
+		return goto('/');
 	}
 </script>
 

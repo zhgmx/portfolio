@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { onNavigate } from '$app/navigation';
+	import { afterNavigate, onNavigate, replaceState } from '$app/navigation';
 	import { bind, setVolume } from 'cuelume';
 	import { onMount } from 'svelte';
 	import Footer from '$lib/Footer.svelte';
@@ -13,6 +13,13 @@
 	onMount(() => {
 		setVolume(0.55);
 		bind();
+	});
+
+	afterNavigate(({ from, to, type }) => {
+		if (type === 'enter' || from?.url.pathname !== '/') return;
+		if (to?.route.id !== '/projects/[slug]' && to?.route.id !== '/writing/[slug]') return;
+
+		replaceState('', { ...page.state, returnToHome: true });
 	});
 
 	onNavigate((navigation) => {
