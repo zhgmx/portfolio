@@ -43,7 +43,8 @@
 		transition:
 			transform 120ms var(--ease-out),
 			color 150ms var(--ease-out),
-			background-color 150ms var(--ease-out);
+			background-color 150ms var(--ease-out),
+			border-color 150ms var(--ease-out);
 	}
 
 	.toggle:active {
