@@ -168,6 +168,7 @@ a {
 	display: flex;
 	flex-direction: column;
 	gap: 0.125rem;
+	width: max-content;
 	max-width: calc(100vw - 2rem);
 	white-space: nowrap;
 	padding: 0.5rem 0.75rem;
