@@ -3,6 +3,7 @@
 	import IconCheckRegular from 'phosphor-icons-svelte/IconCheckRegular.svelte';
 	import IconCopyRegular from 'phosphor-icons-svelte/IconCopyRegular.svelte';
 	import IconEnvelopeSimpleRegular from 'phosphor-icons-svelte/IconEnvelopeSimpleRegular.svelte';
+	import { onDestroy } from 'svelte';
 
 	let { label = '', class: className = '' }: Props = $props();
 
@@ -15,6 +16,23 @@
 	let copied = $state(false);
 	let timer: ReturnType<typeof setTimeout> | undefined;
 
+	function fallbackCopy(): boolean {
+		const textarea = document.createElement('textarea');
+		textarea.value = EMAIL;
+		textarea.style.position = 'fixed';
+		textarea.style.opacity = '0';
+		document.body.appendChild(textarea);
+
+		try {
+			textarea.select();
+			return document.execCommand('copy');
+		} catch {
+			return false;
+		} finally {
+			textarea.remove();
+		}
+	}
+
 	async function copy(event?: MouseEvent) {
 		event?.stopPropagation();
 		let ok = false;
@@ -22,14 +40,7 @@
 			await navigator.clipboard.writeText(EMAIL);
 			ok = true;
 		} catch {
-			const textarea = document.createElement('textarea');
-			textarea.value = EMAIL;
-			textarea.style.position = 'fixed';
-			textarea.style.opacity = '0';
-			document.body.appendChild(textarea);
-			textarea.select();
-			ok = document.execCommand('copy');
-			textarea.remove();
+			ok = fallbackCopy();
 		}
 		if (ok) {
 			play('success', { volume: 0.35 });
@@ -38,6 +49,8 @@
 			timer = setTimeout(() => (copied = false), 1600);
 		}
 	}
+
+	onDestroy(() => clearTimeout(timer));
 </script>
 
 <button
