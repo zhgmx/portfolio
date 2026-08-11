@@ -8,9 +8,28 @@
 	import SoundToggle from '$lib/SoundToggle.svelte';
 	import ThemeToggle from '$lib/ThemeToggle.svelte';
 	import { techLinks } from '$lib/tech';
+	import { jsonLdScript, person, siteUrl } from '$lib/seo';
 	import type { PageProps } from './$types';
 
 	let { data } = $props();
+
+	const structuredData = {
+		'@context': 'https://schema.org',
+		'@graph': [
+			{
+				...person,
+				'@id': `${siteUrl}/#person`
+			},
+			{
+				'@type': 'WebSite',
+				'@id': `${siteUrl}/#website`,
+				name: 'Max Zhang',
+				url: `${siteUrl}/`,
+				inLanguage: 'en',
+				publisher: { '@id': `${siteUrl}/#person` }
+			}
+		]
+	};
 
 	onNavigate(() => {
 		sessionStorage.setItem('portfolio-visited', '1');
@@ -72,6 +91,7 @@
 		name="description"
 		content="A personal portfolio of projects, writing, and experiments by a computer science student."
 	/>
+	{@html jsonLdScript(structuredData)}
 </svelte:head>
 
 <div class="shell">
