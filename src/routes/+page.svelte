@@ -328,6 +328,19 @@
 		border-bottom: none;
 	}
 
+	:global(.copy-email.top-email) :global(.touch-tip) {
+		top: calc(100% + 0.625rem);
+		bottom: auto;
+		left: auto;
+		right: 0;
+		transform: translateY(4px) scale(0.92);
+		transform-origin: top right;
+	}
+
+	:global(.copy-email.top-email) :global(.touch-tip.touch-visible) {
+		transform: translateY(0) scale(1);
+	}
+
 	:global(.copy-email.email-copy) {
 		font-weight: 600;
 		color: var(--ink);

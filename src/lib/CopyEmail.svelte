@@ -60,6 +60,10 @@
 			Copied
 		</span>
 	</span>
+	<span class="touch-tip" class:touch-visible={copied} aria-hidden="true">
+		<IconCheckRegular />
+		Copied
+	</span>
 	<span class="sr-only" aria-live="polite" aria-atomic="true">
 		{copied ? 'Email address copied' : ''}
 	</span>
@@ -150,20 +154,58 @@
 		}
 	}
 
+	.touch-tip {
+		display: none;
+	}
+
 	@media (hover: none), (pointer: coarse) {
-		.copy-email.copied-visible :global(.tip) {
-			opacity: 1;
-			transform: translateY(0);
+		.copy-email :global(.tip) {
+			display: none;
 		}
 
-		.copy-email :global(.tip .label:first-child) {
-			display: none;
+		.touch-tip {
+			position: absolute;
+			left: 50%;
+			bottom: calc(100% + 0.625rem);
+			z-index: 10;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.375rem;
+			white-space: nowrap;
+			padding: 0.375rem 0.75rem;
+			background: var(--paper);
+			border: 1px solid var(--hairline);
+			border-radius: 999px;
+			box-shadow: 0 12px 32px var(--shadow);
+			font-weight: 600;
+			color: var(--ink);
+			opacity: 0;
+			pointer-events: none;
+			transform: translateX(-50%) translateY(4px) scale(0.92);
+			transform-origin: bottom center;
+			transition:
+				opacity 150ms var(--ease-out),
+				transform 150ms var(--ease-out);
+		}
+
+		.touch-tip.touch-visible {
+			opacity: 1;
+			transform: translateX(-50%) translateY(0) scale(1);
+		}
+
+		.touch-tip :global(svg) {
+			width: 1em;
+			height: 1em;
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.label {
 			transition: none;
+		}
+
+		.touch-tip {
+			transition: opacity 150ms var(--ease-out);
 		}
 	}
 </style>
