@@ -313,11 +313,15 @@
 	:global(.top-links .tip) {
 		top: calc(100% + 0.625rem);
 		bottom: auto;
+		left: auto;
+		right: 0;
 	}
 
 	:global(.top-links .tip::after) {
 		top: -5px;
 		bottom: auto;
+		left: auto;
+		right: 1.25rem;
 		border-top: 1px solid var(--hairline);
 		border-left: 1px solid var(--hairline);
 		border-right: none;

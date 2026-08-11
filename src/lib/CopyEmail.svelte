@@ -79,11 +79,6 @@
 		cursor: pointer;
 	}
 
-	.copy-email:focus-visible :global(.tip) {
-		opacity: 1;
-		transform: translateY(0);
-	}
-
 	.copy-email :global(.tip) {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr);
@@ -145,13 +140,24 @@
 	}
 
 	@media (hover: hover) and (pointer: fine) {
-		.copy-email.copied-visible:hover :global(.tip) {
+		.copy-email:focus-visible :global(.tip) {
 			opacity: 1;
 			transform: translateY(0);
 		}
 
 		.copy-email:hover :global(.tip:hover) {
 			background: var(--soft);
+		}
+	}
+
+	@media (hover: none), (pointer: coarse) {
+		.copy-email.copied-visible :global(.tip) {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.copy-email :global(.tip .label:first-child) {
+			display: none;
 		}
 	}
 
