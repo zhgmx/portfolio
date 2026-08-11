@@ -4,6 +4,48 @@
 	import IconArrowLeftRegular from 'phosphor-icons-svelte/IconArrowLeftRegular.svelte';
 	import { onMount } from 'svelte';
 
+	interface ErrorCopy {
+		heading: string;
+		message: string;
+	}
+
+	const defaultError: ErrorCopy = {
+		heading: 'Hmm… something went wrong.',
+		message: 'Try again, or head back to the homepage.'
+	};
+
+	const errors: Record<number, ErrorCopy> = {
+		400: {
+			heading: 'Invalid request.',
+			message: 'The server couldn’t understand your request. Check the URL and try again.'
+		},
+		403: {
+			heading: 'Access denied.',
+			message: 'You don’t have permission to view this page.'
+		},
+		404: {
+			heading: 'Lost?',
+			message: 'The page you’re looking for doesn’t exist or may have moved.'
+		},
+		429: {
+			heading: 'Slow down!',
+			message:
+				'You’ve made a few too many requests recently. Please wait a moment before trying again.'
+		},
+		500: defaultError,
+		502: {
+			heading: 'Something got lost along the way.',
+			message:
+				'The server tried to contact another service but received an invalid response. Try again in a moment.'
+		},
+		503: {
+			heading: 'Things are a little busy.',
+			message: 'The server can’t handle your request at the moment. Try again later.'
+		}
+	};
+
+	const copy = $derived(errors[page.status] ?? defaultError);
+
 	onMount(() => {
 		if (page.status !== 404) return;
 
@@ -32,17 +74,13 @@
 
 <svelte:head>
 	<title>{page.status} | Max Zhang</title>
-	<meta name="description" content="The requested page could not be found." />
+	<meta name="description" content={copy.message} />
+	<meta name="robots" content="noindex" />
 </svelte:head>
 
 <main class="shell">
-	{#if page.status === 404}
-		<h1>Page not found.</h1>
-		<p class="message">The page you're looking for doesn't exist or may have moved.</p>
-	{:else}
-		<h1>Something went wrong.</h1>
-		<p class="message">Try again, or head back to the homepage.</p>
-	{/if}
+	<h1>{copy.heading}</h1>
+	<p class="message">{copy.message}</p>
 	<a class="home-link" href="/" data-cuelume-press="press" data-cuelume-release="release">
 		<IconArrowLeftRegular /> Home
 	</a>
