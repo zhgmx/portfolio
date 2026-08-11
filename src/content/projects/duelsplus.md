@@ -6,7 +6,7 @@ tech: TypeScript
 order: 3
 ---
 
-![Duels+](/projects/duelsplus.png)
+![Duels+](/projects/duelsplus.webp)
 
 A lightweight Minecraft proxy designed to enhance the Hypixel Duels experience. I worked on the proxy itself, not the website (which is what you see above).
 

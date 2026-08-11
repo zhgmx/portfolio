@@ -6,7 +6,7 @@ tech: Java
 order: 2
 ---
 
-![OpenUtils settings screen](/projects/openutils.png)
+![OpenUtils settings screen](/projects/openutils.webp)
 
 An open-source Minecraft 1.8.9 Forge utility mod for client-side gameplay, HUD, and Hypixel features.
 
