@@ -31,6 +31,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		flex-wrap: wrap;
 		gap: 0.75rem 1.5rem;
 		border-top: 1px solid var(--hairline);
 		padding: 1.5rem 0 2rem;
@@ -64,18 +65,6 @@
 	@media (hover: hover) and (pointer: fine) {
 		:global(.link.source-link:hover) {
 			color: var(--ink);
-		}
-	}
-
-	@media (max-width: 38rem) {
-		.footer-inner {
-			align-items: flex-start;
-			flex-direction: column;
-		}
-
-		.footer-right {
-			align-items: flex-start;
-			text-align: left;
 		}
 	}
 
