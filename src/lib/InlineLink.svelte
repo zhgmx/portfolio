@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { previewParts } from './content';
+	import { previewParts } from './links';
 
 	let {
 		href,

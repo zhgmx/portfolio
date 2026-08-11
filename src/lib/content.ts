@@ -1,4 +1,5 @@
-import { marked } from 'marked';
+import { Marked } from 'marked';
+import { previewParts } from './links';
 
 export interface Entry {
 	slug: string;
@@ -26,6 +27,14 @@ const writingFiles = import.meta.glob('../content/writing/*.md', {
 	query: '?raw',
 	import: 'default'
 }) as Record<string, string>;
+
+const markdown = new Marked({
+	renderer: {
+		link({ href, title, tokens }) {
+			return linkHtml(href, this.parser.parseInline(tokens), title ?? undefined);
+		}
+	}
+});
 
 function parse(raw: string): Omit<Entry, 'slug'> {
 	const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(raw);
@@ -92,40 +101,25 @@ export function getPost(slug: string): Entry | undefined {
 	return writing.find((entry) => entry.slug === slug);
 }
 
-export interface Preview {
-	host: string;
-	path: string;
-	external: boolean;
+function escapeAttribute(value: string): string {
+	return value
+		.replaceAll('&', '&amp;')
+		.replaceAll('"', '&quot;')
+		.replaceAll("'", '&#39;')
+		.replaceAll('<', '&lt;')
+		.replaceAll('>', '&gt;');
 }
 
-export function previewParts(href: string): Preview {
-	if (href.startsWith('mailto:')) return { host: href.slice(7), path: '', external: false };
-	if (href.startsWith('/')) return { host: '', path: href, external: false };
-	try {
-		const url = new URL(href);
-		return {
-			host: url.hostname.replace(/^www\./, ''),
-			path: url.pathname === '/' ? '' : url.pathname,
-			external: true
-		};
-	} catch {
-		return { host: href, path: '', external: false };
-	}
-}
-
-export function linkHtml(href: string, label: string): string {
+export function linkHtml(href: string, label: string, title?: string): string {
 	const { host, path, external } = previewParts(href);
 	const target = external ? ' target="_blank" rel="noreferrer"' : '';
+	const titleAttribute = title ? ` title="${escapeAttribute(title)}"` : '';
 	const tip = external
 		? `<span class="tip" aria-hidden="true"><span class="tip-row"><img class="tip-favicon" src="https://www.google.com/s2/favicons?domain=${host}&sz=64" alt="" onerror="this.style.display='none'" /><span class="tip-host">${host}</span><svg class="tip-arrow" viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6" /></svg></span>${path ? `<span class="tip-path">${path}</span>` : ''}</span>`
 		: '';
-	return `<a class="link" href="${href}"${target}>${label}${tip}</a>`;
+	return `<a class="link" href="${escapeAttribute(href)}"${titleAttribute}${target}>${label}${tip}</a>`;
 }
 
 export function markdownHtml(body: string): string {
-	const html = marked.parse(body) as string;
-	return html.replace(
-		/<a href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g,
-		(match, href: string, label: string) => linkHtml(href, label)
-	);
+	return markdown.parse(body) as string;
 }
