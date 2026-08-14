@@ -61,12 +61,12 @@
 	const experience = [
 		{
 			role: 'Web Developer & Consultant',
-			company: 'Assessment Solutions LLC',
+			company: 'Assessment Solutions, LLC.',
 			companyHref: 'https://assessmentsolutionsllc.com/',
 			location: 'New York, NY',
 			dates: 'Nov 2025 – Present',
 			detail:
-				'Led the company\u2019s website development and deployment end to end, from interface to infrastructure, using Vite, React 18, TypeScript, and Tailwind CSS for a research and consulting firm.'
+				'Worked closely with the founder to design, build, and deploy the company\u2019s website, turning its goals and services into a clear online presence. I continue to handle updates and provide technical support as needed.'
 		},
 		{
 			role: 'Software Engineer Intern',
@@ -75,7 +75,7 @@
 			location: 'Shanghai, China',
 			dates: 'Jul – Aug 2026',
 			detail:
-				'Developed internal systems in the ERP department, working on-site with the team in Shanghai.'
+				'Built an internal full-stack application from scratch using Next.js and Microsoft SQL Server to support business processes across the company. I worked across the full development process, from requirements and system design to implementation and debugging.'
 		}
 	];
 </script>
@@ -112,18 +112,23 @@
 		<section class="section about">
 			<h2>About</h2>
 			<p>
-				I'm currently studying at
-				<InlineLink href="https://www.stonybrook.edu/" label="Stony Brook University" />, pursuing a
-				B.S. in Computer Science. Previously, I interned at
-				<InlineLink href="https://www.virtuosgames.com/" label="Virtuos" />, where I assisted with
-				development of internal systems in the ERP department. I'm always open to new opportunities,
-				so feel free to reach out!
+				I'm currently studying at <InlineLink
+					href="https://www.stonybrook.edu/"
+					label="Stony Brook University"
+				/>, working toward a B.S. in Computer Science with a focus on software engineering and AI
+				tooling. I've worked across internships, freelance development, and smaller client projects,
+				including an internship at <InlineLink
+					href="https://www.virtuosgames.com/"
+					label="Virtuos"
+				/>, where I built a full-stack application in the ERP department to support internal
+				business processes across the company.
 			</p>
 			<p>
-				A lot of my past work lives in the Minecraft ecosystem: proxies, mods, and the stats sites
-				and APIs around them. More recently I've been moving toward AI tooling and LLM
-				experimentation. You can find most of my work on
-				<InlineLink href="https://github.com/zhgmx" label="GitHub" />.
+				Lately, I've been focused on AI tooling, LLMs, and the harnesses around them. I enjoy
+				working on the engineering behind these systems and figuring out how to make them more
+				useful in real applications. You can find most of my work on
+				<InlineLink href="https://github.com/zhgmx" label="GitHub" />, and I'm always open to new
+				opportunities.
 			</p>
 		</section>
 
