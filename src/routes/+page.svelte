@@ -115,7 +115,7 @@
 				I'm currently studying at <InlineLink
 					href="https://www.stonybrook.edu/"
 					label="Stony Brook University"
-				/>, working toward a B.S. in Computer Science with a focus on software engineering and AI
+				/>, pursuing a B.S. in Computer Science with a focus on software engineering and AI
 				tooling. I've worked across internships, freelance development, and smaller client projects,
 				including an internship at <InlineLink
 					href="https://www.virtuosgames.com/"
