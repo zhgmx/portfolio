@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { afterNavigate, onNavigate, replaceState } from '$app/navigation';
-	import { bind, setVolume } from 'cuelume';
+	import { bind, setEnabled, setVolume } from 'cuelume';
 	import { onMount } from 'svelte';
+	import { readSoundEnabled } from '$lib/sound';
 	import Footer from '$lib/Footer.svelte';
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
@@ -11,6 +12,7 @@
 	const canonical = $derived(`https://zhgmx.com${page.url.pathname}`);
 
 	onMount(() => {
+		setEnabled(readSoundEnabled());
 		setVolume(0.55);
 		bind();
 	});

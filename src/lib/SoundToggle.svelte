@@ -1,29 +1,18 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { setEnabled } from 'cuelume';
+	import { readSoundEnabled, setSoundEnabled } from './sound';
 	import IconSpeakerHighRegular from 'phosphor-icons-svelte/IconSpeakerHighRegular.svelte';
 	import IconSpeakerNoneRegular from 'phosphor-icons-svelte/IconSpeakerNoneRegular.svelte';
 
-	const STORAGE_KEY = 'cuelume-enabled';
+	let enabled = $state(true);
 
-	function readEnabled() {
-		try {
-			return localStorage.getItem(STORAGE_KEY) !== 'false';
-		} catch {
-			return true;
-		}
-	}
-
-	let enabled = $state(readEnabled());
-
-	onMount(() => setEnabled(enabled));
+	onMount(() => {
+		enabled = readSoundEnabled();
+	});
 
 	function toggle() {
 		enabled = !enabled;
-		setEnabled(enabled);
-		try {
-			localStorage.setItem(STORAGE_KEY, String(enabled));
-		} catch {}
+		setSoundEnabled(enabled);
 	}
 </script>
 
