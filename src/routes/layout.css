@@ -16,23 +16,23 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	--paper: #ffffff;
-	--ink: #111111;
-	--muted: #6f6f6f;
-	--hairline: #e8e8e8;
-	--soft: #f4f4f4;
-	--shadow: rgba(17, 17, 17, 0.12);
+	--paper: #fffcf5;
+	--ink: #282530;
+	--muted: #746b79;
+	--hairline: #e7dfe8;
+	--soft: #f3edf3;
+	--shadow: rgba(40, 37, 48, 0.12);
 	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 :root[data-theme='dark'] {
 	color-scheme: dark;
 
-	--paper: #101012;
-	--ink: #ecece8;
-	--muted: #94948e;
-	--hairline: #26262b;
-	--soft: #1a1a1e;
+	--paper: #211e27;
+	--ink: #fff4df;
+	--muted: #bdb0c1;
+	--hairline: #403747;
+	--soft: #2d2734;
 	--shadow: rgba(0, 0, 0, 0.5);
 }
 

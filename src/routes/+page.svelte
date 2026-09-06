@@ -50,7 +50,7 @@
 		},
 		{
 			label: 'Tools',
-			items: ['Docker', 'Podman', 'Git', 'Cloudflare', 'Tailscale', 'Linux', 'Figma']
+			items: ['Bun', 'Docker', 'Podman', 'Git', 'Cloudflare', 'Tailscale', 'Linux', 'Figma']
 		},
 		{
 			label: 'AI',
@@ -93,7 +93,19 @@
 	<main>
 		<section class="hero">
 			<div class="hero-top">
-				<h1>Max Zhang</h1>
+				<div class="identity">
+					<img
+						class="avatar"
+						src="/favicon.svg"
+						alt=""
+						width="64"
+						height="64"
+					/>
+					<div>
+						<h1>Max Zhang</h1>
+						<p class="role">@zhgmx</p>
+					</div>
+				</div>
 				<div class="top-links">
 					{#each socials as link}
 						{@const Icon = link.icon}
@@ -106,7 +118,6 @@
 					<SoundToggle />
 				</div>
 			</div>
-			<p class="role">@zhgmx</p>
 		</section>
 
 		<section class="section about">
@@ -244,6 +255,20 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
+	}
+
+	.identity {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		flex-shrink: 0;
+	}
+
+	.avatar {
+		display: block;
+		width: 4rem;
+		height: 4rem;
+		object-fit: contain;
 	}
 
 	h1 {
@@ -535,6 +560,15 @@
 	}
 
 	@media (max-width: 30rem) {
+		.hero-top {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.top-links {
+			justify-content: flex-start;
+		}
+
 		.project {
 			grid-template-columns: 1fr;
 			grid-template-rows: auto;

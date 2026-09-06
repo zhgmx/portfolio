@@ -14,6 +14,7 @@ export const techLinks: Record<string, { icon: string; href: string }> = {
 	'Tailwind CSS': { icon: 'tailwindcss', href: 'https://tailwindcss.com/' },
 	Express: { icon: 'express', href: 'https://expressjs.com/' },
 	'Node.js': { icon: 'nodedotjs', href: 'https://nodejs.org/' },
+	Bun: { icon: 'bun', href: 'https://bun.sh/' },
 	Docker: { icon: 'docker', href: 'https://www.docker.com/' },
 	Podman: { icon: 'podman', href: 'https://podman.io/' },
 	Git: { icon: 'git', href: 'https://git-scm.com/' },
