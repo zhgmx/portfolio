@@ -4,11 +4,12 @@
 	import { bind, setEnabled, setVolume } from 'cuelume';
 	import { onMount } from 'svelte';
 	import { readSoundEnabled } from '$lib/sound';
+	import { absoluteUrl } from '$lib/seo';
 	import Footer from '$lib/Footer.svelte';
 	import './layout.css';
 
 	let { children } = $props();
-	const canonical = $derived(`https://zhgmx.com${page.url.pathname}`);
+	const canonical = $derived(absoluteUrl(page.url.pathname));
 
 	onMount(() => {
 		setEnabled(readSoundEnabled());

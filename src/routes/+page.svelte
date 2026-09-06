@@ -1,24 +1,22 @@
 <script lang="ts">
 	import IconGithubLogoRegular from 'phosphor-icons-svelte/IconGithubLogoRegular.svelte';
 	import IconLinkedinLogoRegular from 'phosphor-icons-svelte/IconLinkedinLogoRegular.svelte';
+	import Seo from '$lib/Seo.svelte';
 	import CopyEmail from '$lib/CopyEmail.svelte';
 	import InlineLink from '$lib/InlineLink.svelte';
 	import ProjectThumb from '$lib/ProjectThumb.svelte';
 	import SoundToggle from '$lib/SoundToggle.svelte';
 	import ThemeToggle from '$lib/ThemeToggle.svelte';
 	import { techLinks } from '$lib/tech';
-	import { jsonLdScript, person, siteUrl } from '$lib/seo';
+	import { homeTitle, homeDescription, jsonLdScript, person, siteUrl } from '$lib/seo';
 	import type { PageProps } from './$types';
 
-	let { data } = $props();
+	let { data }: PageProps = $props();
 
 	const structuredData = {
 		'@context': 'https://schema.org',
 		'@graph': [
-			{
-				...person,
-				'@id': `${siteUrl}/#person`
-			},
+			person,
 			{
 				'@type': 'WebSite',
 				'@id': `${siteUrl}/#website`,
@@ -80,12 +78,9 @@
 	];
 </script>
 
+<Seo title={homeTitle} description={homeDescription} />
+
 <svelte:head>
-	<title>Max Zhang</title>
-	<meta
-		name="description"
-		content="A personal portfolio of projects, writing, and experiments by a computer science student."
-	/>
 	{@html jsonLdScript(structuredData)}
 </svelte:head>
 

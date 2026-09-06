@@ -1,9 +1,8 @@
+import { siteUrl } from '$lib/seo';
 import { getProjects, getWriting } from '$lib/content';
 import type { RequestHandler } from './$types';
 
 export const prerender = true;
-
-const origin = 'https://zhgmx.com';
 
 function escapeXml(value: string): string {
 	return value
@@ -22,7 +21,7 @@ export const GET: RequestHandler = () => {
 	];
 
 	const urls = paths
-		.map((path) => `\t<url><loc>${escapeXml(`${origin}${path}`)}</loc></url>`)
+		.map((path) => `\t<url><loc>${escapeXml(`${siteUrl}${path}`)}</loc></url>`)
 		.join('\n');
 	const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 
