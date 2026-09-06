@@ -108,7 +108,7 @@
 							<Icon />
 						</InlineLink>
 					{/each}
-					<CopyEmail class="top-email" />
+					<CopyEmail />
 					<ThemeToggle />
 					<SoundToggle />
 				</div>
@@ -121,8 +121,8 @@
 				I'm currently studying at <InlineLink
 					href="https://www.stonybrook.edu/"
 					label="Stony Brook University"
-				/>, pursuing a B.S. in Computer Science with a focus on software engineering and AI
-				tooling. I've worked across internships, freelance development, and smaller client projects,
+				/>, pursuing a B.S. in Computer Science with a focus on software engineering and AI tooling.
+				I've worked across internships, freelance development, and smaller client projects,
 				including an internship at <InlineLink
 					href="https://www.virtuosgames.com/"
 					label="Virtuos"
@@ -222,8 +222,8 @@
 			<h2>Contact</h2>
 			<p>
 				You can contact me at
-				<CopyEmail label="mx@zhgmx.com" class="email-copy" /> or on <InlineLink
-					href="https://linkedin.com/in/zhgmx">LinkedIn</InlineLink
+				<CopyEmail label="mx@zhgmx.com" /> or on <InlineLink href="https://linkedin.com/in/zhgmx"
+					>LinkedIn</InlineLink
 				>.
 			</p>
 			<p class="subtext">
@@ -309,28 +309,8 @@
 		height: 1.125em;
 	}
 
-	:global(.copy-email.top-email) {
-		justify-content: center;
-		width: 2rem;
-		height: 2rem;
-		border-radius: 999px;
-		color: var(--muted);
-		transition:
-			color 150ms var(--ease-out),
-			background-color 150ms var(--ease-out),
-			transform 120ms var(--ease-out);
-	}
-
-	:global(.copy-email.top-email:active) {
-		transform: scale(0.96);
-	}
-
-	:global(.copy-email.top-email) :global(.mail-icon) {
-		width: 1.125em;
-		height: 1.125em;
-	}
-
 	:global(.top-links .tip) {
+		transform-origin: var(--tip-arrow-left, 1.25rem) top;
 		top: calc(100% + 0.625rem);
 		bottom: auto;
 		left: auto;
@@ -340,36 +320,12 @@
 	:global(.top-links .tip::after) {
 		top: -5px;
 		bottom: auto;
-		left: auto;
-		right: 1.25rem;
+		left: var(--tip-arrow-left, 1.25rem);
+		right: auto;
 		border-top: 1px solid var(--hairline);
 		border-left: 1px solid var(--hairline);
 		border-right: none;
 		border-bottom: none;
-	}
-
-	:global(.copy-email.top-email) :global(.touch-tip) {
-		top: calc(100% + 0.625rem);
-		bottom: auto;
-		left: auto;
-		right: 0;
-		transform: translateY(4px) scale(0.92);
-		transform-origin: top right;
-	}
-
-	:global(.copy-email.top-email) :global(.touch-tip.touch-visible) {
-		transform: translateY(0) scale(1);
-	}
-
-	:global(.copy-email.email-copy) {
-		font-weight: 600;
-		color: var(--ink);
-		text-decoration: underline;
-		text-decoration-color: var(--hairline);
-		text-underline-offset: 3px;
-		transition:
-			color 150ms var(--ease-out),
-			text-decoration-color 150ms var(--ease-out);
 	}
 
 	.section {
@@ -517,15 +473,9 @@
 	}
 
 	@media (hover: hover) and (pointer: fine) {
-		:global(.link.icon-link:hover),
-		:global(.copy-email.top-email:hover) {
+		:global(.link.icon-link:hover) {
 			color: var(--ink);
 			background: var(--soft);
-		}
-
-		:global(.copy-email.email-copy:hover) {
-			color: var(--muted);
-			text-decoration-color: currentColor;
 		}
 
 		.about :global(.link:hover) {
@@ -548,7 +498,6 @@
 		.project,
 		.project-title,
 		:global(.link.icon-link),
-		:global(.copy-email.top-email),
 		:global(.stack-item) {
 			transition: none;
 		}

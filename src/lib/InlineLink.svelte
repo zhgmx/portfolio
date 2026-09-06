@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Tooltip from './Tooltip.svelte';
 	import type { Snippet } from 'svelte';
 	import { previewParts } from './links';
 
@@ -42,12 +43,12 @@
 	{:else if icon}
 		<img class="link-icon" width="16" height="16" src={icon} alt="" />
 	{/if}
-	{#if label}{label}{/if}{#if external && showFavicon}<span class="tip" aria-hidden="true">
+	{#if label}{label}{/if}{#if external && showFavicon}<Tooltip>
 			<span class="tip-row">
 				<img class="tip-favicon" src={faviconUrl} alt="" onerror={() => (showFavicon = false)} />
 				<span class="tip-host">{preview.host}</span>
 				<svg class="tip-arrow" viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6" /></svg>
 			</span>
 			{#if preview.path}<span class="tip-path">{preview.path}</span>{/if}
-		</span>{/if}</a
+		</Tooltip>{/if}</a
 >

@@ -57,7 +57,7 @@
 		color: var(--muted);
 	}
 
-	:global(.link.source-link) :global(svg) {
+	:global(.link.source-link > svg) {
 		width: 1em;
 		height: 1em;
 	}

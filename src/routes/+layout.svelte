@@ -4,6 +4,7 @@
 	import { bind, setEnabled, setVolume } from 'cuelume';
 	import { onMount } from 'svelte';
 	import { readSoundEnabled } from '$lib/sound';
+	import { bindTooltips, positionVisibleTooltips } from '$lib/tooltips';
 	import { absoluteUrl } from '$lib/seo';
 	import Footer from '$lib/Footer.svelte';
 	import './layout.css';
@@ -15,9 +16,11 @@
 		setEnabled(readSoundEnabled());
 		setVolume(0.55);
 		bind();
+		return bindTooltips();
 	});
 
 	afterNavigate(({ from, to, type }) => {
+		requestAnimationFrame(positionVisibleTooltips);
 		if (type === 'enter' || from?.url.pathname !== '/') return;
 		if (to?.route.id !== '/projects/[slug]' && to?.route.id !== '/writing/[slug]') return;
 

@@ -1,219 +1,195 @@
 <script lang="ts">
 	import { play } from 'cuelume';
-	import IconCheckRegular from 'phosphor-icons-svelte/IconCheckRegular.svelte';
-	import IconCopyRegular from 'phosphor-icons-svelte/IconCopyRegular.svelte';
-	import IconEnvelopeSimpleRegular from 'phosphor-icons-svelte/IconEnvelopeSimpleRegular.svelte';
 	import { onDestroy } from 'svelte';
+	import Tooltip from './Tooltip.svelte';
+	import CopyStatusIcon from './CopyStatusIcon.svelte';
 
-	let { label = '', class: className = '' }: Props = $props();
-
-	interface Props {
-		label?: string;
-		class?: string;
-	}
-
-	const EMAIL = 'mx@zhgmx.com';
-	let copied = $state(false);
-	let timer: ReturnType<typeof setTimeout> | undefined;
+	let { label = '' }: { label?: string } = $props();
+	const email = 'mx@zhgmx.com';
+	const messages = { idle: 'Copy email', copied: 'Email copied', error: 'Copy unavailable' };
+	let status = $state<keyof typeof messages>('idle');
+	let busy = $state(false);
+	let keyboard = $state(false);
+	let disposed = false;
+	let resetTimer: ReturnType<typeof setTimeout>;
 
 	function fallbackCopy(): boolean {
-		const textarea = document.createElement('textarea');
-		textarea.value = EMAIL;
-		textarea.style.position = 'fixed';
-		textarea.style.opacity = '0';
-		document.body.appendChild(textarea);
-
+		const focused = document.activeElement;
+		const field = document.createElement('textarea');
+		field.value = email;
+		field.style.cssText = 'position:fixed;left:0;top:0;opacity:0';
+		document.body.appendChild(field);
 		try {
-			textarea.select();
+			field.select();
 			return document.execCommand('copy');
 		} catch {
 			return false;
 		} finally {
-			textarea.remove();
+			field.remove();
+			if (focused instanceof HTMLElement) focused.focus({ preventScroll: true });
 		}
 	}
 
-	async function copy(event?: MouseEvent) {
-		event?.stopPropagation();
-		let ok = false;
+	async function copy(event: MouseEvent) {
+		if (busy) return;
+		keyboard = event.detail === 0;
+		busy = true;
+		clearTimeout(resetTimer);
+		let copied = false;
 		try {
-			await navigator.clipboard.writeText(EMAIL);
-			ok = true;
-		} catch {
-			ok = fallbackCopy();
-		}
-		if (ok) {
-			play('success', { volume: 0.35 });
+			await navigator.clipboard.writeText(email);
 			copied = true;
-			clearTimeout(timer);
-			timer = setTimeout(() => (copied = false), 1600);
+		} catch {
+			if (!disposed) copied = fallbackCopy();
 		}
+		if (disposed) return;
+		busy = false;
+		status = copied ? 'copied' : 'error';
+		if (copied) play('success', { volume: 0.35 });
+		resetTimer = setTimeout(
+			() => {
+				status = 'idle';
+			},
+			copied ? 1800 : 4000
+		);
 	}
 
-	onDestroy(() => clearTimeout(timer));
+	onDestroy(() => {
+		disposed = true;
+		clearTimeout(resetTimer);
+	});
 </script>
 
 <button
-	class="copy-email {className}"
-	class:copied-visible={copied}
+	class="copy-email"
+	class:icon-copy={!label}
+	class:text-copy={!!label}
+	class:keyboard
 	type="button"
 	onclick={copy}
+	onpointerdown={() => (keyboard = false)}
+	onfocus={() => (keyboard = true)}
 	aria-label={label ? `Copy ${label}` : 'Copy email address'}
+	aria-busy={busy}
 	data-cuelume-press="press"
 >
-	{#if label}{label}{:else}<IconEnvelopeSimpleRegular class="mail-icon" />{/if}
-
-	<span class="tip" aria-hidden="true">
-		<span class="label" class:hidden={copied}>
-			<IconCopyRegular />
-			Click to copy
+	{#if label}
+		{label}
+	{:else}
+		<CopyStatusIcon copied={status === 'copied'} instant={keyboard} />
+	{/if}
+	<Tooltip open={status !== 'idle'} instant={keyboard}>
+		<span class="tip-row">
+			<CopyStatusIcon copied={status === 'copied'} instant={keyboard} />
+			<span class="feedback-states" class:changed={status !== 'idle'}>
+				<span class="tip-host feedback-state idle" class:current={status === 'idle'}
+					>{messages.idle}</span
+				>
+				<span class="tip-host feedback-state result" class:current={status !== 'idle'}
+					>{status === 'error' ? messages.error : messages.copied}</span
+				>
+			</span>
 		</span>
-		<span class="label" class:hidden={!copied}>
-			<IconCheckRegular />
-			Copied
-		</span>
-	</span>
-	<span class="touch-tip" class:touch-visible={copied} aria-hidden="true">
-		<IconCheckRegular />
-		Copied
-	</span>
-	<span class="sr-only" aria-live="polite" aria-atomic="true">
-		{copied ? 'Email address copied' : ''}
-	</span>
+		<span class="tip-path">{email}</span>
+	</Tooltip>
 </button>
+
+<span class="sr-only" role="status" aria-live="polite" aria-atomic="true">
+	{status === 'copied'
+		? 'Email address copied'
+		: status === 'error'
+			? `Could not copy. The email address is ${email}.`
+			: ''}
+</span>
 
 <style>
 	.copy-email {
 		position: relative;
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
 		padding: 0;
 		border: 0;
 		background: none;
 		font: inherit;
 		color: inherit;
 		cursor: pointer;
+		transition: transform 120ms var(--ease-out);
 	}
-
-	.copy-email :global(.tip) {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr);
-		width: 8.75rem;
-		pointer-events: none;
-		transition:
-			opacity 150ms var(--ease-out),
-			transform 150ms var(--ease-out),
-			width 150ms var(--ease-out);
-	}
-
-	.copy-email.copied-visible :global(.tip) {
-		width: 6.75rem;
-	}
-
-	.copy-email :global(.tip .label) {
-		grid-area: 1 / 1;
+	.icon-copy {
 		justify-content: center;
+		width: 2rem;
+		height: 2rem;
+		border-radius: 999px;
+		color: var(--muted);
 	}
-
-	.mail-icon {
-		width: 1.125em;
-		height: 1.125em;
-	}
-
-	.label {
-		grid-area: 1 / 1;
-		display: inline-flex;
-		align-items: center;
-		gap: 0.375rem;
-		white-space: nowrap;
+	.text-copy {
 		font-weight: 600;
 		color: var(--ink);
+		text-decoration: underline;
+		text-decoration-color: var(--hairline);
+		text-underline-offset: 3px;
+	}
+	@media (hover: hover) and (pointer: fine) {
+		.icon-copy:hover {
+			background: var(--soft);
+			color: var(--ink);
+		}
+		.text-copy:hover {
+			color: var(--muted);
+			text-decoration-color: currentColor;
+		}
+	}
+	.copy-email:active {
+		transform: scale(0.97);
+	}
+	.feedback-states {
+		display: grid;
+		overflow: hidden;
+	}
+	.feedback-state {
+		grid-area: 1 / 1;
 		transition:
-			opacity 150ms var(--ease-out),
-			transform 150ms var(--ease-out);
+			transform 180ms var(--ease-out),
+			opacity 180ms var(--ease-out);
 	}
-
-	.label.hidden {
+	.result {
+		transform: translateY(100%);
 		opacity: 0;
-		transform: translateY(2px);
 	}
-
-	.label :global(svg) {
-		width: 1em;
-		height: 1em;
+	.changed .idle {
+		transform: translateY(-100%);
+		opacity: 0;
+	}
+	.changed .result {
+		transform: translateY(0);
+		opacity: 1;
 	}
 
 	.sr-only {
 		position: absolute;
 		width: 1px;
 		height: 1px;
-		padding: 0;
 		margin: -1px;
+		padding: 0;
 		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
+		clip-path: inset(50%);
 		white-space: nowrap;
-		border: 0;
 	}
-
-	@media (hover: hover) and (pointer: fine) {
-		.copy-email:focus-visible :global(.tip) {
-			opacity: 1;
-			transform: translateY(0);
-		}
+	.keyboard .feedback-state,
+	.keyboard {
+		transition: none;
 	}
-
-	.touch-tip {
-		display: none;
+	.keyboard:active {
+		transform: none;
 	}
-
-	@media (hover: none), (pointer: coarse) {
-		.copy-email :global(.tip) {
-			display: none;
-		}
-
-		.touch-tip {
-			position: absolute;
-			left: 50%;
-			bottom: calc(100% + 0.625rem);
-			z-index: 10;
-			display: inline-flex;
-			align-items: center;
-			gap: 0.375rem;
-			white-space: nowrap;
-			padding: 0.375rem 0.75rem;
-			background: var(--paper);
-			border: 1px solid var(--hairline);
-			border-radius: 999px;
-			box-shadow: 0 12px 32px var(--shadow);
-			font-weight: 600;
-			color: var(--ink);
-			opacity: 0;
-			pointer-events: none;
-			transform: translateX(-50%) translateY(4px) scale(0.92);
-			transform-origin: bottom center;
-			transition:
-				opacity 150ms var(--ease-out),
-				transform 150ms var(--ease-out);
-		}
-
-		.touch-tip.touch-visible {
-			opacity: 1;
-			transform: translateX(-50%) translateY(0) scale(1);
-		}
-
-		.touch-tip :global(svg) {
-			width: 1em;
-			height: 1em;
-		}
-	}
-
 	@media (prefers-reduced-motion: reduce) {
-		.label {
-			transition: none;
+		.copy-email:active,
+		.feedback-state,
+		.changed .idle,
+		.changed .result {
+			transform: none;
 		}
-
-		.touch-tip {
+		.feedback-state {
 			transition: opacity 150ms var(--ease-out);
 		}
 	}
