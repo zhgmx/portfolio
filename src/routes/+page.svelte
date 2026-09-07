@@ -195,22 +195,24 @@
 			</div>
 		</section>
 
-		<section class="section">
-			<h2>Writing</h2>
-			<div class="items">
-				{#each data.writing as post}
-					<a
-						class="item"
-						href={`/writing/${post.slug}`}
-						data-cuelume-press="press"
-						data-cuelume-release="release"
-					>
-						<span class="item-title">{post.title}</span>
-						<span class="item-description">{post.description}</span>
-					</a>
-				{/each}
-			</div>
-		</section>
+		{#if data.writing.length}
+			<section class="section">
+				<h2>Writing</h2>
+				<div class="items">
+					{#each data.writing as post}
+						<a
+							class="item"
+							href={`/writing/${post.slug}`}
+							data-cuelume-press="press"
+							data-cuelume-release="release"
+						>
+							<span class="item-title">{post.title}</span>
+							<span class="item-description">{post.description}</span>
+						</a>
+					{/each}
+				</div>
+			</section>
+		{/if}
 
 		<section class="section">
 			<h2>Contact</h2>

@@ -19,78 +19,27 @@
 </script>
 
 <button
-	class="toggle"
+	class="preference-toggle"
 	type="button"
 	onclick={toggle}
 	aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
 	data-cuelume-toggle
 >
-	<span class="icon icon-sun" aria-hidden="true"><IconSunRegular /></span>
-	<span class="icon icon-moon" aria-hidden="true"><IconMoonRegular /></span>
+	<span class="preference-icon icon-sun" aria-hidden="true"><IconSunRegular /></span>
+	<span class="preference-icon icon-moon" aria-hidden="true"><IconMoonRegular /></span>
 </button>
 
 <style>
-	.toggle {
-		position: relative;
-		width: 2rem;
-		height: 2rem;
-		padding: 0;
-		border: 1px solid var(--hairline);
-		border-radius: 999px;
-		background: transparent;
-		color: var(--ink);
-		cursor: pointer;
-		transition:
-			transform 120ms var(--ease-out),
-			color 150ms var(--ease-out),
-			background-color 150ms var(--ease-out),
-			border-color 150ms var(--ease-out);
-	}
-
-	.toggle:active {
-		transform: scale(0.96);
-	}
-
-	.icon {
-		position: absolute;
-		inset: 0;
-		display: grid;
-		place-items: center;
-		transition: opacity 150ms var(--ease-out);
-	}
-
-	.icon :global(svg) {
-		width: 1.125em;
-		height: 1.125em;
-	}
-
 	.icon-sun {
 		opacity: 0;
 	}
-
 	.icon-moon {
 		opacity: 1;
 	}
-
 	:global(html[data-theme='dark']) .icon-sun {
 		opacity: 1;
 	}
-
 	:global(html[data-theme='dark']) .icon-moon {
 		opacity: 0;
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.toggle,
-		.icon {
-			transition: none;
-		}
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		.toggle:hover {
-			color: var(--muted);
-			background: var(--soft);
-		}
 	}
 </style>
