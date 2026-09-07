@@ -11,7 +11,7 @@
 	let { entry }: EntryProps = $props();
 
 	interface EntryProps {
-		entry: Entry;
+		entry: Omit<Entry, 'body' | 'draft'> & { html: string };
 	}
 
 	const meta = $derived(

@@ -1,6 +1,7 @@
 ---
 title: Lorem ipsum dolor
 date: 2026-08-01
+draft: true
 ---
 
 This is a placeholder post, just to see how the writing section looks.

@@ -1,6 +1,6 @@
 import { homeTitle } from '$lib/seo';
 import { error } from '@sveltejs/kit';
-import { getProjects, getWriting } from '$lib/content';
+import { getProjects, getWriting } from '$lib/server/content';
 import { renderSocialCard } from '$lib/server/social-card';
 import type { EntryGenerator, RequestHandler } from './$types';
 

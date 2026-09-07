@@ -1,5 +1,5 @@
 import { siteUrl } from '$lib/seo';
-import { getProjects, getWriting } from '$lib/content';
+import { getProjects, getWriting } from '$lib/server/content';
 import type { RequestHandler } from './$types';
 
 export const prerender = true;
