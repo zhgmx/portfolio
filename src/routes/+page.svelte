@@ -89,13 +89,7 @@
 		<section class="hero">
 			<div class="hero-top">
 				<div class="identity">
-					<img
-						class="avatar"
-						src="/favicon.svg"
-						alt=""
-						width="64"
-						height="64"
-					/>
+					<img class="avatar" src="/favicon.svg" alt="" width="64" height="64" />
 					<div>
 						<h1>Max Zhang</h1>
 						<p class="role">@zhgmx</p>
@@ -450,8 +444,7 @@
 
 	.project {
 		display: grid;
-		grid-template-columns: 9rem 1fr;
-		grid-template-rows: 5.625rem;
+		grid-template-columns: 9rem minmax(0, 1fr);
 		gap: 0 1.25rem;
 		align-items: center;
 		padding: 0.75rem 0;
@@ -463,6 +456,7 @@
 	}
 
 	.project-main {
+		overflow-wrap: anywhere;
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;

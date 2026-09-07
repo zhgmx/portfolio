@@ -21,7 +21,9 @@
 
 	afterNavigate(({ from, to, type }) => {
 		requestAnimationFrame(positionVisibleTooltips);
-		if (type === 'enter' || from?.url.pathname !== '/') return;
+		// Only new link navigations put the homepage behind the detail entry.
+		// Traversing history must preserve the restored entry's original marker.
+		if (type !== 'link' || from?.url.pathname !== '/') return;
 		if (to?.route.id !== '/projects/[slug]' && to?.route.id !== '/writing/[slug]') return;
 
 		replaceState('', { ...page.state, returnToHome: true });
