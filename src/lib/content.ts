@@ -1,5 +1,5 @@
 import { Marked } from 'marked';
-import { previewParts } from './links';
+import { escapeAttribute, previewHtml, previewParts } from './links';
 import { techLinks } from './tech';
 
 export interface Entry {
@@ -154,22 +154,11 @@ export function getPost(slug: string): Entry | undefined {
 	return writing.find((entry) => entry.slug === slug);
 }
 
-function escapeAttribute(value: string): string {
-	return value
-		.replaceAll('&', '&amp;')
-		.replaceAll('"', '&quot;')
-		.replaceAll("'", '&#39;')
-		.replaceAll('<', '&lt;')
-		.replaceAll('>', '&gt;');
-}
-
 export function linkHtml(href: string, label: string, title?: string): string {
-	const { host, path, external } = previewParts(href);
+	const { external } = previewParts(href);
 	const target = external ? ' target="_blank" rel="noreferrer"' : '';
 	const titleAttribute = title ? ` title="${escapeAttribute(title)}"` : '';
-	const tip = external
-		? `<span class="tip" aria-hidden="true"><span class="tip-row"><img class="tip-favicon" src="https://www.google.com/s2/favicons?domain=${host}&sz=64" alt="" onerror="this.style.display='none'" /><span class="tip-host">${host}</span><svg class="tip-arrow" viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6" /></svg></span>${path ? `<span class="tip-path">${path}</span>` : ''}</span>`
-		: '';
+	const tip = external ? `<span class="tip" aria-hidden="true">${previewHtml(href)}</span>` : '';
 	return `<a class="link" href="${escapeAttribute(href)}"${titleAttribute}${target}>${label}${tip}</a>`;
 }
 

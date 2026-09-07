@@ -303,25 +303,6 @@
 		height: 1.125em;
 	}
 
-	:global(.top-links .tip) {
-		transform-origin: var(--tip-arrow-left, 1.25rem) top;
-		top: calc(100% + 0.625rem);
-		bottom: auto;
-		left: auto;
-		right: 0;
-	}
-
-	:global(.top-links .tip::after) {
-		top: -5px;
-		bottom: auto;
-		left: var(--tip-arrow-left, 1.25rem);
-		right: auto;
-		border-top: 1px solid var(--hairline);
-		border-left: 1px solid var(--hairline);
-		border-right: none;
-		border-bottom: none;
-	}
-
 	.section {
 		padding: 2.25rem 0;
 	}

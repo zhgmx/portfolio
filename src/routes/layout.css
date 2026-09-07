@@ -186,7 +186,7 @@ a {
 	border-radius: 0.625rem;
 	box-shadow: 0 12px 32px var(--shadow);
 	opacity: 0;
-	pointer-events: none;
+	pointer-events: auto;
 	transform: translateY(4px);
 	transform-origin: var(--tip-arrow-left, 1.25rem) bottom;
 	transition:
@@ -208,6 +208,31 @@ a {
 	transform: rotate(45deg);
 }
 
+.tip::before {
+	content: '';
+	position: absolute;
+	inset: 100% 0 auto;
+	height: 0.75rem;
+}
+
+.tip[data-side='below'] {
+	top: calc(100% + 0.625rem);
+	bottom: auto;
+	transform-origin: var(--tip-arrow-left, 1.25rem) top;
+}
+
+.tip[data-side='below']::before {
+	inset: auto 0 100%;
+}
+
+.tip[data-side='below']::after {
+	top: -5px;
+	bottom: auto;
+	border: 0;
+	border-top: 1px solid var(--hairline);
+	border-left: 1px solid var(--hairline);
+}
+
 .tip-row {
 	display: flex;
 	align-items: center;
@@ -222,6 +247,10 @@ a {
 	margin: 0;
 }
 
+.tip:has(.tip-favicon) .tip-path {
+	padding-left: calc(1.125em + 0.5rem);
+}
+
 .tip-host {
 	font-weight: 600;
 	color: var(--ink);
@@ -230,7 +259,6 @@ a {
 .tip-path {
 	color: var(--muted);
 	font-weight: 400;
-	padding-left: calc(1.125em + 0.5rem);
 }
 
 .tip-arrow {

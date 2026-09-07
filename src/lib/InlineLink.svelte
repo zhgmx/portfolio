@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Tooltip from './Tooltip.svelte';
 	import type { Snippet } from 'svelte';
-	import { previewParts } from './links';
+	import { previewHtml, previewParts } from './links';
 
 	let {
 		href,
@@ -23,17 +23,14 @@
 		children?: Snippet;
 	}
 
-	let showFavicon = $state(true);
-
-	const preview = $derived(previewParts(href));
-	const faviconUrl = $derived(`https://www.google.com/s2/favicons?domain=${preview.host}&sz=64`);
+	const isExternal = $derived(external && previewParts(href).external);
 </script>
 
 <a
 	class="link {className}"
 	{href}
-	target={external ? '_blank' : undefined}
-	rel={external ? 'noreferrer' : undefined}
+	target={isExternal ? '_blank' : undefined}
+	rel={isExternal ? 'noreferrer' : undefined}
 	aria-label={label ? undefined : ariaLabel}
 	data-cuelume-press="press"
 	data-cuelume-release="release"
@@ -43,12 +40,7 @@
 	{:else if icon}
 		<img class="link-icon" width="16" height="16" src={icon} alt="" />
 	{/if}
-	{#if label}{label}{/if}{#if external && showFavicon}<Tooltip>
-			<span class="tip-row">
-				<img class="tip-favicon" src={faviconUrl} alt="" onerror={() => (showFavicon = false)} />
-				<span class="tip-host">{preview.host}</span>
-				<svg class="tip-arrow" viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6" /></svg>
-			</span>
-			{#if preview.path}<span class="tip-path">{preview.path}</span>{/if}
+	{#if label}{label}{/if}{#if isExternal}<Tooltip>
+			{@html previewHtml(href)}
 		</Tooltip>{/if}</a
 >
