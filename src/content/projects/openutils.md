@@ -1,13 +1,13 @@
 ---
 title: OpenUtils
 source: https://github.com/zhgmx/OpenUtils
-summary: An open-source Minecraft 1.8.9 Forge utility mod for client-side gameplay, HUD, and Hypixel features.
+summary: A modular Minecraft client mod with customizable HUD tools and gameplay utilities.
 tech: Java
 order: 2
 ---
 
 ![OpenUtils settings screen](/projects/openutils.webp)
 
-An open-source Minecraft 1.8.9 Forge utility mod for client-side gameplay, HUD, and Hypixel features.
+A modular Minecraft 1.8.9 client mod built with Java, Minecraft Forge, and Mixin. It includes 32 feature modules, configurable feature lifecycles, and a drag-and-drop HUD editor with persistent layouts.
 
-Built for players who want practical quality-of-life tools that stay available, readable, and easy to fork. The mod ships with a settings screen and a drag-and-drop layout editor for positioning HUD elements.
+I've published 21 releases with 670+ Forge-JAR downloads.

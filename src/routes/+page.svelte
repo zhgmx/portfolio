@@ -40,7 +40,7 @@
 	const stack = [
 		{
 			label: 'Languages',
-			items: ['TypeScript', 'JavaScript', 'Java', 'Kotlin', 'Rust']
+			items: ['TypeScript', 'JavaScript', 'Java', 'Kotlin', 'Rust', 'SQL']
 		},
 		{
 			label: 'Web',
@@ -48,7 +48,19 @@
 		},
 		{
 			label: 'Tools',
-			items: ['Bun', 'Docker', 'Podman', 'Git', 'Cloudflare', 'Tailscale', 'Linux', 'Figma']
+			items: [
+				'Bun',
+				'Docker',
+				'Podman',
+				'Git',
+				'Cloudflare',
+				'Tailscale',
+				'Linux',
+				'Figma',
+				'Technolutions Slate',
+				'Microsoft SQL Server',
+				'SQLite'
+			]
 		},
 		{
 			label: 'AI',
@@ -58,22 +70,31 @@
 
 	const experience = [
 		{
-			role: 'Web Developer & Consultant',
-			company: 'Assessment Solutions, LLC.',
-			companyHref: 'https://assessmentsolutionsllc.com/',
-			location: 'New York, NY',
-			dates: 'Nov 2025 – Present',
+			role: 'Project Student Assistant',
+			company: 'Stony Brook University',
+			companyHref: 'https://www.stonybrook.edu/',
+			location: 'Stony Brook, NY',
+			dates: 'Oct 2026 – Present',
 			detail:
-				'Worked closely with the founder to design, build, and deploy the company\u2019s website, turning its goals and services into a clear online presence. I continue to handle updates and provide technical support as needed.'
+				'I work with the Enrollment Management team, proofreading content in Technolutions Slate and reviewing academic program forms and web content at a university serving 27,700+ students.'
 		},
 		{
 			role: 'Software Engineer Intern',
-			company: 'Virtuos',
+			company: 'Virtuos Games',
 			companyHref: 'https://www.virtuosgames.com/',
 			location: 'Shanghai, China',
 			dates: 'Jul – Aug 2026',
 			detail:
-				'Built an internal full-stack application from scratch using Next.js and Microsoft SQL Server to support business processes across the company. I worked across the full development process, from requirements and system design to implementation and debugging.'
+				'In the ERP Department, I built a full-stack business-requirements management application using Next.js, SQL Server, and AI-assisted development for employees and stakeholders across the organization. I added automated tests and combined code-quality checks with manual and LLM-assisted reviews to identify implementation issues and improve maintainability.'
+		},
+		{
+			role: 'Web Developer & Technical Consultant',
+			company: 'Assessment Solutions, LLC.',
+			companyHref: 'https://assessmentsolutionsllc.com/',
+			location: 'New York, NY',
+			dates: 'Nov 2025 – May 2026',
+			detail:
+				'I built and deployed the website for an education research and evaluation consultancy serving 30+ partner organizations. I managed post-launch content updates, deployments, and technical support as services evolved.'
 		}
 	];
 </script>
@@ -115,9 +136,9 @@
 				I'm currently studying at <InlineLink
 					href="https://www.stonybrook.edu/"
 					label="Stony Brook University"
-				/>, pursuing a B.S. in Computer Science with a focus on software engineering and AI tooling.
-				I've worked across internships, freelance development, and smaller client projects,
-				including an internship at <InlineLink
+				/>, with a focus on software engineering and AI tooling.
+				I build software alongside school, drawing on experiences from internships, freelance development, and smaller client projects. 
+				This past summer, I interned at <InlineLink
 					href="https://www.virtuosgames.com/"
 					label="Virtuos"
 				/>, where I built a full-stack application in the ERP department to support internal
@@ -125,8 +146,8 @@
 			</p>
 			<p>
 				Lately, I've been focused on AI tooling, LLMs, and the harnesses around them. I enjoy
-				working on the engineering behind these systems and figuring out how to make them more
-				useful in real applications. You can find most of my work on
+				experimenting with these systems and pushing them to their limits. I've been getting into reverse engineering, especially using AI to build custom software for existing hardware. 
+				You can find most of my work on
 				<InlineLink href="https://github.com/zhgmx" label="GitHub" />, and I'm always open to new
 				opportunities.
 			</p>

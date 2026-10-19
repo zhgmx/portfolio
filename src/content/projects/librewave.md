@@ -1,17 +1,21 @@
 ---
 title: LibreWave
 source: https://github.com/zhgmx/LibreWave
-summary: A Linux-native Wave Link alternative for Elgato hardware, built in Rust.
-tech: Rust
-order: 4
+summary: Linux-native audio control and mixing software for Elgato Wave hardware.
+tech: Rust, Linux
+order: 1
 ---
 
-LibreWave is the rewrite of Undertone, my attempt at building a Linux-native alternative to Wave Link for Elgato's Wave hardware.
+![LibreWave audio control interface for Elgato Wave:3](/projects/librewave.webp)
 
-The original Undertone work is still on the [undertone branch](https://github.com/zhgmx/LibreWave/tree/undertone), while the rewrite is on [main](https://github.com/zhgmx/LibreWave/tree/main).
+LibreWave is my attempt at building a Linux-native alternative to Wave Link for Elgato's Wave hardware, starting with the Wave:3. After making the switch to Linux as my daily operating system, I noticed many functionality gaps with the Elgato hardware support on Linux.
 
-Undertone started as an experiment in what Claude Opus 4.5 could do with Rust. It got pretty far, but it never became something I could actually use. The code quality was not good enough, and I eventually stopped investing time in it. However, I still wanted a way to get Wave products working cleanly on Linux, so I'm bringing it back as LibreWave with a full rewrite that targets the hardware itself.
+For instance, I had to add a custom Wireplumber script just to allow the microphone to properly capture audio. [This repository](https://github.com/jmansar/wavexlr-on-linux-cfg) has a better technical write-up on it.
 
-A lot of the early work has been figuring out how Wave Link talks to the hardware. I used the macOS app and its bundled frameworks as the main source, then compared what I found with the Windows builds. Newer models like GPT-5.6 Sol helped a lot here, and this would have taken an absurdly long time without them. A lot of the protocol work is done now, and you can find it being implemented in the repository.
+A lot of the project has been reversing how Wave Link talks to the hardware. I've been using AI to help work through the macOS app and its bundled frameworks, compare them with the Windows builds, and turn the findings into a USB protocol implementation.
 
-I'm still using LibreWave as my go-to project for experimenting with agentic engineering, though I'm much more involved now instead of letting the agent do whatever it wants to. The end goal is for it to become something I actually use in my daily workflow.
+It's written in Rust, with a background daemon that manages the hardware, mixer, and saved profiles. The CLI and native GPUI interface both talk to that daemon over a local Unix socket.
+
+On the audio side, ALSA handles the physical microphone and headphone playback, while PipeWire connects the mixer to desktop applications. Software inputs feed separate monitor and stream mixes, with independent levels for each, so I can change what I hear without changing what gets sent to a stream. The mixer runs at 48 kHz and keeps allocations and blocking work out of the audio callback.
+
+It's still a work in progress, and I'm working through recovery and longer hardware tests before I'd call it ready for everyday use. It's also become my go-to project for experimenting with AI-assisted development and reverse engineering, with the goal of getting it into my own daily setup.

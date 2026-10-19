@@ -7,6 +7,7 @@ export const techLinks: Record<string, { icon: string; href: string }> = {
 	Java: { icon: 'java', href: 'https://dev.java/' },
 	Kotlin: { icon: 'kotlin', href: 'https://kotlinlang.org/' },
 	Rust: { icon: 'rust', href: 'https://www.rust-lang.org/' },
+	SQL: { icon: 'sql', href: 'https://learn.microsoft.com/en-us/sql/t-sql/language-reference' },
 	React: { icon: 'react', href: 'https://react.dev/' },
 	'Next.js': { icon: 'nextdotjs', href: 'https://nextjs.org/' },
 	SvelteKit: { icon: 'svelte', href: 'https://svelte.dev/docs/kit/introduction' },
@@ -21,6 +22,12 @@ export const techLinks: Record<string, { icon: string; href: string }> = {
 	Cloudflare: { icon: 'cloudflare', href: 'https://www.cloudflare.com/' },
 	Tailscale: { icon: 'tailscale', href: 'https://tailscale.com/' },
 	Linux: { icon: 'linux', href: 'https://www.linux.org/' },
+	'Technolutions Slate': { icon: 'slate', href: 'https://technolutions.com/' },
+	'Microsoft SQL Server': {
+		icon: 'microsoftsqlserver',
+		href: 'https://www.microsoft.com/en-us/sql-server'
+	},
+	SQLite: { icon: 'sqlite', href: 'https://sqlite.org/' },
 	Figma: { icon: 'figma', href: 'https://www.figma.com/' },
 	Codex: { icon: 'openai', href: 'https://openai.com/codex/' },
 	Claude: { icon: 'claude', href: 'https://claude.ai/' }

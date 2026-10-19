@@ -2,7 +2,7 @@ export const siteUrl = 'https://zhgmx.com';
 
 export const homeTitle = 'Max Zhang';
 export const homeDescription =
-	'Max Zhang, a computer science student at Stony Brook University, building software and AI tools. Explore projects, writing, and experience.';
+	'Max Zhang, an undergraduate at Stony Brook University intending to major in Computer Science. Explore projects in web development, Linux audio, and Minecraft.';
 export function socialImage(path: string, title: string) {
 	return {
 		url: `${siteUrl}/og/${path === '/' ? 'home' : path.replace(/^\//, '')}.png`,
@@ -16,7 +16,7 @@ export const person = {
 	image: `${siteUrl}/icon-512.png`,
 	name: 'Max Zhang',
 	url: siteUrl,
-	jobTitle: 'Computer Science Student',
+	jobTitle: 'Undergraduate Student',
 	affiliation: {
 		'@type': 'CollegeOrUniversity',
 		name: 'Stony Brook University'
