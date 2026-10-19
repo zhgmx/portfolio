@@ -136,8 +136,8 @@
 				I'm currently studying at <InlineLink
 					href="https://www.stonybrook.edu/"
 					label="Stony Brook University"
-				/>, with a focus on software engineering and AI tooling.
-				I build software alongside school, drawing on experiences from internships, freelance development, and smaller client projects. 
+				/>, with a focus on software engineering and AI tooling. I build software alongside school,
+				drawing on experiences from internships, freelance development, and smaller client projects.
 				This past summer, I interned at <InlineLink
 					href="https://www.virtuosgames.com/"
 					label="Virtuos"
@@ -146,8 +146,9 @@
 			</p>
 			<p>
 				Lately, I've been focused on AI tooling, LLMs, and the harnesses around them. I enjoy
-				experimenting with these systems and pushing them to their limits. I've been getting into reverse engineering, especially using AI to build custom software for existing hardware. 
-				You can find most of my work on
+				experimenting with these systems and pushing them to their limits. I've been getting into
+				reverse engineering, especially using AI to build custom software for existing hardware. You
+				can find most of my work on
 				<InlineLink href="https://github.com/zhgmx" label="GitHub" />, and I'm always open to new
 				opportunities.
 			</p>
