@@ -18,5 +18,6 @@
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
 	},
+	"r2_buckets": [{ "binding": "RESUME", "bucket_name": "resume" }],
 	"compatibility_flags": ["nodejs_compat"]
 }

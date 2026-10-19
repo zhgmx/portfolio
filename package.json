@@ -20,6 +20,7 @@
 		"verify": "bun run format:check && bun run lint && bun run check && bun run test && bun run build && bun scripts/check-build.ts"
 	},
 	"devDependencies": {
+		"@cloudflare/workers-types": "^5.20261012.1",
 		"@resvg/resvg-js": "^2.6.2",
 		"@sveltejs/adapter-auto": "^7.0.1",
 		"@sveltejs/adapter-cloudflare": "^7.2.9",

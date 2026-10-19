@@ -1,17 +1,20 @@
 <script lang="ts">
 	import IconGithubLogoRegular from 'phosphor-icons-svelte/IconGithubLogoRegular.svelte';
 	import IconLinkedinLogoRegular from 'phosphor-icons-svelte/IconLinkedinLogoRegular.svelte';
+	import IconReadCvLogoRegular from 'phosphor-icons-svelte/IconReadCvLogoRegular.svelte';
 	import Seo from '$lib/Seo.svelte';
 	import CopyEmail from '$lib/CopyEmail.svelte';
 	import InlineLink from '$lib/InlineLink.svelte';
 	import ProjectThumb from '$lib/ProjectThumb.svelte';
 	import SoundToggle from '$lib/SoundToggle.svelte';
 	import ThemeToggle from '$lib/ThemeToggle.svelte';
+	import Tooltip from '$lib/Tooltip.svelte';
 	import { techLinks } from '$lib/tech';
 	import { homeTitle, homeDescription, jsonLdScript, person, siteUrl } from '$lib/seo';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
+	const resume = new URL('/resume.pdf', siteUrl);
 
 	const structuredData = {
 		'@context': 'https://schema.org',
@@ -117,6 +120,29 @@
 					</div>
 				</div>
 				<div class="top-links">
+					<a
+						class="link icon-link"
+						href={resume.pathname}
+						aria-label="Resume"
+						target="_blank"
+						rel="noreferrer"
+						data-sveltekit-reload
+						data-sveltekit-preload-data="off"
+						data-cuelume-press="press"
+						data-cuelume-release="release"
+					>
+						<IconReadCvLogoRegular />
+						<Tooltip>
+							<span class="tip-row">
+								<IconReadCvLogoRegular class="tip-favicon" />
+								<span class="tip-host">{resume.hostname}</span>
+								<svg class="tip-arrow" viewBox="0 0 16 16">
+									<path d="M4 12 12 4M6 4h6v6" />
+								</svg>
+							</span>
+							<span class="tip-path">{resume.pathname}</span>
+						</Tooltip>
+					</a>
 					{#each socials as link}
 						{@const Icon = link.icon}
 						<InlineLink class="icon-link" href={link.href} ariaLabel={link.label}>
